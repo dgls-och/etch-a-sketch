@@ -39,3 +39,85 @@ function printEtcher(gridSize = 16) {
     }
 }
 printEtcher();
+
+function resetCell() {
+    gridResetter.addEventListener("click", (e) => {
+        e.preventDefault();
+        container.innerText = "";
+        gridSize = prompt("Enter the number of cells you want");
+
+        if (gridSize >= 16 && gridSize <= 96) {
+            for (let i = 0; i < gridSize; i++) {
+                const row = document.createElement("div");
+                row.classList.add("grid-row");
+
+                for (let j = 0; j < gridSize; j++) {
+                    const cell = document.createElement("div");
+                    cell.classList.add("grid-cell");
+                    row.appendChild(cell);
+
+                    sketchOptions.forEach((option) => {
+                        option.addEventListener("click", (e) => {
+                            if (option.id === "ink") {
+                                cell.addEventListener('mouseover', (e) => {
+                                    e.preventDefault();
+                                    cell.style.backgroundColor = "black";
+                                });
+                            }
+
+                            if (option.id === "eraser") {
+                                cell.addEventListener('mouseover', (e) => {
+                                    e.preventDefault();
+                                    cell.style.backgroundColor = "inherit";
+                                });
+                            }
+
+                            if (option.id === "resetter") {
+                                cell.style.backgroundColor = "inherit";
+                            }
+                        });
+                    });
+                }
+
+                container.appendChild(row);
+            }
+        } else {
+            alert("ERROR: only figures between 16 and 96 inclusive are allowed!");
+            for (let i = 0; i < 16; i++) {
+                const row = document.createElement("div");
+                row.classList.add("grid-row");
+
+                for (let j = 0; j < 16; j++) {
+                    const cell = document.createElement("div");
+                    cell.classList.add("grid-cell");
+                    row.appendChild(cell);
+
+                    sketchOptions.forEach((option) => {
+                        option.addEventListener("click", (e) => {
+                            if (option.id === "ink") {
+                                cell.addEventListener('mouseover', (e) => {
+                                    e.preventDefault();
+                                    cell.style.backgroundColor = "black";
+                                });
+                            }
+
+                            if (option.id === "eraser") {
+                                cell.addEventListener('mouseover', (e) => {
+                                    e.preventDefault();
+                                    cell.style.backgroundColor = "inherit";
+                                });
+                            }
+
+                            if (option.id === "resetter") {
+                                cell.style.backgroundColor = "inherit";
+                            }
+                        });
+                    });
+                }
+
+                container.appendChild(row);
+            }
+        }
+    });
+}
+resetCell();

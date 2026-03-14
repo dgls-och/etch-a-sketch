@@ -61,7 +61,13 @@ function resetCell() {
                             if (option.id === "ink") {
                                 cell.addEventListener('mouseover', (e) => {
                                     e.preventDefault();
-                                    cell.style.backgroundColor = "black";
+                                    //initialise darkness level at 0%
+                                    cell.dataset.darkness = 0;
+
+                                    const r = Math.floor(Math.random() * 255);
+                                    const g = Math.floor(Math.random() * 255);
+                                    const b = Math.floor(Math.random() * 255);
+                                    cell.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
                                 });
                             }
 

@@ -42,7 +42,7 @@ function printEtcher(gridSize = 16) {
 }
 printEtcher();
 
-function resetCell() {
+function resetCellNumber() {
     gridResetter.addEventListener("click", (e) => {
         e.preventDefault();
         container.innerText = "";
@@ -65,4 +65,4 @@ function resetCell() {
         }
     });
 }
-resetCell();
+resetCellNumber();

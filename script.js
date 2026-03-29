@@ -1,6 +1,7 @@
 const container = document.querySelector("#grid-container");
 const sketchOptions = document.querySelectorAll("button");
 const gridResetter = document.querySelector("#grid-resetter");
+let opacityValue = 0;
 
 function dispatchSketchOptions(cell) {
     sketchOptions.forEach((option) => {
@@ -11,6 +12,7 @@ function dispatchSketchOptions(cell) {
                     const r = Math.floor(Math.random() * 255);
                     const g = Math.floor(Math.random() * 255);
                     const b = Math.floor(Math.random() * 255);
+                    cell.style.opacity = opacityValue < 100 ? `${opacityValue += 10}%`: "100%";
                     cell.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
                 });
             }
@@ -18,10 +20,12 @@ function dispatchSketchOptions(cell) {
                 cell.addEventListener('mouseover', (e) => {
                     e.preventDefault();
                     cell.style.backgroundColor = "inherit";
+                    cell.style.opacity = "0%";
                 });
             }
             if (option.id === "resetter") {
                 cell.style.backgroundColor = "inherit";
+                cell.style.opacity = "0%";
             }
         });
     });

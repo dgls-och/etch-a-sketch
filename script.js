@@ -1,6 +1,6 @@
-const container = document.querySelector("#grid-container");
-const sketchOptions = document.querySelectorAll("button");
-const gridResetter = document.querySelector("#grid-resetter");
+const container = document.querySelector('#grid-container');
+const sketchOptions = document.querySelectorAll('button');
+const gridResetter = document.querySelector('#grid-resetter');
 let activeMode = "ink";
 
 sketchOptions.forEach((option) => {
@@ -13,6 +13,15 @@ sketchOptions.forEach((option) => {
         }
     });
 });
+
+function resetAllCells() {
+    const allCells = document.querySelectorAll('.grid-cell');
+    allCells.forEach((cell) => {
+        cell.style.backgroundColor = "inherit";
+        cell.style.opacity = "0";
+        cell.dataset.opacity = "0";
+    });
+}
 
 function dispatchSketchOptions(cell) {
     cell.dataset.opacity = 0;

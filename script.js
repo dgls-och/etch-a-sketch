@@ -3,13 +3,24 @@ const sketchOptions = document.querySelectorAll("button");
 const gridResetter = document.querySelector("#grid-resetter");
 let activeMode = "ink";
 
+sketchOptions.forEach((option) => {
+    option.addEventListener('click', (e) => {
+        if (option.id === "resetter") {
+            resetAllCells();
+        } else {
+            activeMode = option.id;
+            console.info("Current mode: " + activeMode)
+        }
+    });
+});
+
 function dispatchSketchOptions(cell) {
     cell.dataset.opacity = 0;
     cell.addEventListener('mouseover', (e) => {
         e.preventDefault();
         if (activeMode === "ink") {
             let currentOp = parseFloat(cell.dataset.opacity);
-            if(currentOp < 1) {
+            if (currentOp < 1) {
                 currentOp += 0.1;
                 cell.dataset.opacity = currentOp;
                 cell.style.opacity = currentOp;

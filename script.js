@@ -52,17 +52,7 @@ function resetCellNumber() {
         container.innerText = "";
         gridSize = prompt("Enter the number of cells you want");
         if (gridSize >= 16 && gridSize <= 96) {
-            for (let i = 0; i < gridSize; i++) {
-                const row = document.createElement("div");
-                row.classList.add("grid-row");
-                for (let j = 0; j < gridSize; j++) {
-                    const cell = document.createElement("div");
-                    cell.classList.add("grid-cell");
-                    row.appendChild(cell);
-                    dispatchSketchOptions(cell);
-                }
-                container.appendChild(row);
-            }
+            printEtcher(gridSize);
         } else {
             alert("ERROR: only figures between 16 and 96 inclusive are allowed!");
             printEtcher();

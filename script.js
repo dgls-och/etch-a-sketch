@@ -1,33 +1,28 @@
 const container = document.querySelector("#grid-container");
 const sketchOptions = document.querySelectorAll("button");
 const gridResetter = document.querySelector("#grid-resetter");
-let opacityValue = 0;
+let activeMode = "ink";
 
 function dispatchSketchOptions(cell) {
-    sketchOptions.forEach((option) => {
-        option.addEventListener("click", (e) => {
-            if (option.id === "ink") {
-                cell.addEventListener('mouseover', (e) => {
-                    e.preventDefault();
-                    const r = Math.floor(Math.random() * 255);
-                    const g = Math.floor(Math.random() * 255);
-                    const b = Math.floor(Math.random() * 255);
-                    cell.style.opacity = opacityValue < 100 ? `${opacityValue += 10}%`: "100%";
-                    cell.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
-                });
+    cell.dataset.opacity = 0;
+    cell.addEventListener('mouseover', (e) => {
+        e.preventDefault();
+        if (activeMode === "ink") {
+            let currentOp = parseFloat(cell.dataset.opacity);
+            if(currentOp < 1) {
+                currentOp += 0.1;
+                cell.dataset.opacity = currentOp;
+                cell.style.opacity = currentOp;
+                let r = Math.floor(Math.random() * 256);
+                let g = Math.floor(Math.random() * 256);
+                let b = Math.floor(Math.random() * 256);
+                cell.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
             }
-            if (option.id === "eraser") {
-                cell.addEventListener('mouseover', (e) => {
-                    e.preventDefault();
-                    cell.style.backgroundColor = "inherit";
-                    cell.style.opacity = "0%";
-                });
-            }
-            if (option.id === "resetter") {
-                cell.style.backgroundColor = "inherit";
-                cell.style.opacity = "0%";
-            }
-        });
+        } else if (activeMode === "eraser") {
+            cell.style.backgroundColor = "inherit";
+            cell.style.opacity = 0;
+            cell.dataset.opacity = 0;
+        }
     });
 }
 
